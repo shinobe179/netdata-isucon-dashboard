@@ -16,13 +16,15 @@ git clone https://github.com/shinobe179/netdata-isucon-dashboard
 sudo cp -p netdata-isucon-dashboard/isucon.html /usr/share/netdata/web/isucon.html
 sudo chown netdata:netdata /usr/share/netdata/web/isucon.html
 
-# for server-a
+# connect ssh port-forwarding
+
+## for server-a
 ssh -L 29999:localhost:19999 server-a
 
-# for server-b
+## for server-b
 ssh -L 39999:localhost:19999 server-b
 
-# for server-c
+## for server-c
 ssh -L 49999:localhost:19999 server-c
 ```
 

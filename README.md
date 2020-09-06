@@ -2,7 +2,7 @@
 Netdata dashboard for ISUCON
 
 # Prerequisites
-You have already installed Netdata to your machine.
+You have already installed Netdata to your local machine and servers.
 
 # How to Use
 

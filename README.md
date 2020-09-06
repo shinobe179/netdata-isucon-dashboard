@@ -28,4 +28,4 @@ ssh -L 39999:localhost:19999 server-b
 ssh -L 49999:localhost:19999 server-c
 ```
 
-...and browze `http://localhost:19999/isucon.html`.
+...and browse `http://localhost:19999/isucon.html`.

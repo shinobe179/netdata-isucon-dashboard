@@ -1,6 +1,8 @@
 # netdata-isucon-dashboard
 Netdata dashboard for ISUCON
 
+![image](https://cdn-ak.f.st-hatena.com/images/fotolife/b/befs_anne/20200907/20200907004027.png)
+
 # Prerequisites
 You have already installed Netdata to your local machine and servers.
 

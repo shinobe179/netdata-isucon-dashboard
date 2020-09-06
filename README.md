@@ -9,6 +9,13 @@ You have already installed Netdata to your local machine and servers.
 # How to Use
 
 ```
+# clone this repo
+git clone https://github.com/shinobe179/netdata-isucon-dashboard
+
+# copy isucon.html
+sudo cp -p netdata-isucon-dashboard/isucon.html /usr/share/netdata/web/isucon.html
+sudo chown netdata:netdata /usr/share/netdata/web/isucon.html
+
 # for server-a
 ssh -L 29999:localhost:19999 server-a
 
@@ -19,3 +26,4 @@ ssh -L 39999:localhost:19999 server-b
 ssh -L 49999:localhost:19999 server-c
 ```
 
+...and browze `http://localhost:19999/isucon.html`.

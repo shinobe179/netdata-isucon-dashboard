@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<!-- SPDX-License-Identifier: GPL-3.0-or-later -->
+<html lang="en">
+<head>
+    <title>NetData ISUCON Dashboard</title>
+    <meta name="application-name" content="netdata">
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:image" content="https://cloud.githubusercontent.com/assets/2662304/22945737/e98cd0c6-f2fd-11e6-96f1-5501934b0955.png"/>
+    <meta property="og:url" content="http://my-netdata.io/"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:site_name" content="netdata"/>
+    <meta property="og:title" content="netdata - real-time performance monitoring, done right!"/>
+    <meta property="og:description" content="Stunning real-time dashboards, blazingly fast and extremely interactive. Zero configuration, zero dependencies, zero maintenance." />
+
+</head>
+<script>
+// this section has to appear before loading dashboard.js
+
+// Select a theme.
+// uncomment on of the two themes:
+
+// var netdataTheme = 'default'; // this is white
+var netdataTheme = 'slate'; // this is dark
+
+
+// Set the default netdata server.
+// on charts without a 'data-host', this one will be used.
+// the default is the server that dashboard.js is downloaded from.
+
+// var netdataServer = 'http://my.server:19999/';
+</script>
+
+<!--
+    Load dashboard.js
+
+    to host this HTML file on your web server,
+    you have to load dashboard.js from the netdata server.
+
+    So, pick one the two below
+    If you pick the first, set the server name/IP.
+
+    The second assumes you host this file on /usr/share/netdata/web
+    and that you have chown it to be owned by netdata:netdata
+-->
+<!-- <script type="text/javascript" src="http://my.server:19999/dashboard.js"></script> -->
+<script type="text/javascript" src="dashboard.js?v20190902-0"></script>
+
+<script>
+// Set options for TV operation
+// This has to be done, after dashboard.js is loaded
+
+// destroy charts not shown (lowers memory on the browser)
+NETDATA.options.current.destroy_on_hide = true;
+
+// set this to false, to always show all dimensions
+NETDATA.options.current.eliminate_zero_dimensions = true;
+
+// lower the pressure on this browser
+NETDATA.options.current.concurrent_refreshes = false;
+
+// if the tv browser is too slow (a pi?)
+// set this to false
+NETDATA.options.current.parallel_refresher = true;
+
+// always update the charts, even if focus is lost
+// NETDATA.options.current.stop_updates_when_focus_is_lost = false;
+
+// Since you may render charts from many servers and any of them may
+// become offline for some time, the charts will break.
+// This will reload the page every RELOAD_EVERY minutes
+
+var RELOAD_EVERY = 5;
+setTimeout(function(){
+    location.reload();
+}, RELOAD_EVERY * 60 * 1000);
+
+</script>
+<body>
+
+<div style="width: 100%; text-align: center; display: inline-block;">
+    <div class="grid-area">
+        <div class="main-area">
+            <div style="width: 100%; height: 24vh; text-align: center; display: inline-block;">
+                <div style="width: 100%; height: 10px; text-align: center; display: inline-block;">
+                    <b>RAM</b>
+                </div>
+                <div style="width: 100%; height: 100%; text-align: center; display: inline-block;">
+                    <br/>
+                    <div data-netdata="system.ram"
+                            data-host="http://localhost:29999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            ></div>
+                    <div data-netdata="system.ram"
+                            data-host="http://localhost:39999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            ></div>
+                    <div data-netdata="system.ram"
+                            data-host="http://localhost:49999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            ></div>
+                </div>
+            </div>
+            <div style="width: 100%; height: 24vh; text-align: center; display: inline-block;">
+                <div style="width: 100%; height: 10px; text-align: center; display: inline-block;">
+                    <b>Apps CPU Time </b>
+                </div>
+                <div style="width: 100%; height: 100%; text-align: center; display: inline-block;">
+                    <br/>
+                    <div data-netdata="apps.cpu"
+                            data-host="http://localhost:29999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 100]"
+                            ></div>
+                    <div data-netdata="apps.cpu"
+                            data-host="http://localhost:39999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 100]"
+                            ></div>
+                    <div data-netdata="apps.cpu"
+                            data-host="http://localhost:49999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 100]"
+                            ></div>
+                </div>
+            </div>
+            <div style="width: 100%; height: 24vh; text-align: center; display: inline-block;">
+                <div style="width: 100%; height: 10px; text-align: center; display: inline-block;">
+                    <b>CPU </b>
+                </div>
+                <div style="width: 100%; height: 100%; text-align: center; display: inline-block;">
+                    <br/>
+                    <div data-netdata="system.cpu"
+                            data-host="http://localhost:29999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 100]"
+                            ></div>
+                    <div data-netdata="system.cpu"
+                            data-host="http://localhost:39999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 100]"
+                            ></div>
+                    <div data-netdata="system.cpu"
+                            data-host="http://localhost:49999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 100]"
+                            ></div>
+                </div>
+            </div>
+
+            <div style="width: 100%; height: 24vh; text-align: center; display: inline-block;">
+                <div style="width: 100%; height: 10px; text-align: center; display: inline-block;">
+                    <b>Disk I/O </b>
+                </div>
+                <div style="width: 100%; height: 100%; text-align: center; display: inline-block;">
+                    <div data-netdata="system.io"
+                            data-host="http://localhost:29999"
+                            data-common-max="io"
+                            data-common-min="io"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            ></div>
+                    <div data-netdata="system.io"
+                            data-host="http://localhost:39999"
+                            data-common-max="io"
+                            data-common-min="io"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            ></div>
+                    <div data-netdata="system.io"
+                            data-host="http://localhost:49999"
+                            data-common-max="io"
+                            data-common-min="io"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            ></div>
+                </div>
+            </div>
+            <div style="width: 100%; height: 24vh; text-align: center; display: inline-block;">
+                <div style="width: 100%; height: 10px; text-align: center; display: inline-block;">
+                    <b>IPv4 traffic </b>
+                </div>
+                <div style="width: 100%; height: 100%; text-align: center; display: inline-block;">
+                    <div data-netdata="system.net"
+                            data-host="http://localhost:29999"
+                            data-common-max="traffic"
+                            data-common-min="traffic"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            ></div>
+                    <div data-netdata="system.net"
+                            data-host="http://localhost:39999"
+                            data-common-max="traffic"
+                            data-common-min="traffic"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            ></div>
+                    <div data-netdata="system.net"
+                            data-host="http://localhost:49999"
+                            data-common-max="traffic"
+                            data-common-min="traffic"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            ></div>
+                </div>
+            </div>
+        </div>
+        <div class="mysql-area">
+            <div style="width: 100%; height: 24vh; text-align: center; display: inline-block;">
+                <div style="width: 100%; height: 10px; text-align: center; display: inline-block;">
+                    <b>MySQL queries </b>
+                </div>
+                <div style="width: 100%; height: 100%; text-align: center; display: inline-block;">
+                    <br/>
+                    <div data-netdata="mysql_isucon.queries"
+                            data-host="http://localhost:29999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 10000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.queries"
+                            data-host="http://localhost:39999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 10000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.queries"
+                            data-host="http://localhost:49999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 10000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.queries_type"
+                            data-host="http://localhost:29999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 3000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.queries_type"
+                            data-host="http://localhost:39999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 3000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.queries_type"
+                            data-host="http://localhost:49999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 3000]"
+                            ></div>
+                </div>
+            </div>
+            <div style="width: 100%; height: 24vh; text-align: center; display: inline-block;">
+                <div style="width: 100%; height: 10px; text-align: center; display: inline-block;">
+                    <b>MySQL handlers</b>
+                </div>
+                <div style="width: 100%; height: 100%; text-align: center; display: inline-block;">
+                    <br/>
+                    <div data-netdata="mysql_isucon.handlers"
+                            data-host="http://localhost:29999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 10000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.handlers"
+                            data-host="http://localhost:39999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 10000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.handlers"
+                            data-host="http://localhost:49999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 10000]"
+                            ></div>
+                </div>
+            </div>
+            <div style="width: 100%; height: 24vh; text-align: center; display: inline-block;">
+                <div style="width: 100%; height: 10px; text-align: center; display: inline-block;">
+                    <b>MySQL locks</b>
+                </div>
+                <div style="width: 100%; height: 100%; text-align: center; display: inline-block;">
+                    <br/>
+                    <div data-netdata="mysql_isucon.table_locks"
+                            data-host="http://localhost:29999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 10]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.table_locks"
+                            data-host="http://localhost:39999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 10]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.table_locks"
+                            data-host="http://localhost:49999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 10]"
+                            ></div>
+                </div>
+            </div>
+            <div style="width: 100%; height: 24vh; text-align: center; display: inline-block;">
+                <div style="width: 100%; height: 10px; text-align: center; display: inline-block;">
+                    <b>MySQL issues</b>
+                </div>
+                <div style="width: 100%; height: 100%; text-align: center; display: inline-block;">
+                    <br/>
+                    <div data-netdata="mysql_isucon.join_issues"
+                            data-host="http://localhost:29999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 1000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.join_issues"
+                            data-host="http://localhost:39999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 1000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.join_issues"
+                            data-host="http://localhost:49999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 1000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.sort_issues"
+                            data-host="http://localhost:29999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 1000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.sort_issues"
+                            data-host="http://localhost:39999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 1000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.sort_issues"
+                            data-host="http://localhost:49999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 1000]"
+                            ></div>
+                </div>
+            </div>
+            <div style="width: 100%; height: 24vh; text-align: center; display: inline-block;">
+                <div style="width: 100%; height: 10px; text-align: center; display: inline-block;">
+                    <b>MySQL temporary operations</b>
+                </div>
+                <div style="width: 100%; height: 100%; text-align: center; display: inline-block;">
+                    <br/>
+                    <div data-netdata="mysql_isucon.tmp"
+                            data-host="http://localhost:29999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 100]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.tmp"
+                            data-host="http://localhost:39999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 100]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.tmp"
+                            data-host="http://localhost:49999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 100]"
+                            ></div>
+                </div>
+            </div>
+            <div style="width: 100%; height: 24vh; text-align: center; display: inline-block;">
+                <div style="width: 100%; height: 10px; text-align: center; display: inline-block;">
+                    <b>MySQL connections</b>
+                </div>
+                <div style="width: 100%; height: 100%; text-align: center; display: inline-block;">
+                    <br/>
+                    <div data-netdata="mysql_isucon.connections"
+                            data-host="http://localhost:29999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 1000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.connections"
+                            data-host="http://localhost:39999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 1000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.connections"
+                            data-host="http://localhost:49999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 1000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.connections_active"
+                            data-host="http://localhost:29999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 200]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.connections_active"
+                            data-host="http://localhost:39999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 200]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.connections_active"
+                            data-host="http://localhost:49999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 200]"
+                            ></div>
+                    <br/>
+                    <div data-netdata="mysql_isucon.connection_errors"
+                            data-host="http://localhost:29999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 100]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.connection_errors"
+                            data-host="http://localhost:39999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 100]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.connection_errors"
+                            data-host="http://localhost:49999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 100]"
+                            ></div>
+                </div>
+            </div>
+            <div style="width: 100%; height: 24vh; text-align: center; display: inline-block;">
+                <div style="width: 100%; height: 10px; text-align: center; display: inline-block;">
+                    <b>MySQL threads</b>
+                </div>
+                <div style="width: 100%; height: 100%; text-align: center; display: inline-block;">
+                    <br/>
+                    <div data-netdata="mysql_isucon.threads"
+                            data-host="http://localhost:29999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 1000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.threads"
+                            data-host="http://localhost:39999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 1000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.threads"
+                            data-host="http://localhost:49999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 1000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.threads_creation_rate"
+                            data-host="http://localhost:29999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 200]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.threads_creation_rate"
+                            data-host="http://localhost:39999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 200]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.threads_creation_rate"
+                            data-host="http://localhost:49999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 200]"
+                            ></div>
+                    <br/>
+                    <div data-netdata="mysql_isucon.thread_cache_misses"
+                            data-host="http://localhost:29999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 100]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.thread_cache_misses"
+                            data-host="http://localhost:39999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 100]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.thread_cache_misses"
+                            data-host="http://localhost:49999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 100]"
+                            ></div>
+                </div>
+            </div>
+            <div style="width: 100%; height: 24vh; text-align: center; display: inline-block;">
+                <div style="width: 100%; height: 10px; text-align: center; display: inline-block;">
+                    <b>MySQL InnoDB</b>
+                </div>
+                <div style="width: 100%; height: 100%; text-align: center; display: inline-block;">
+                    <br/>
+                    <div data-netdata="mysql_isucon.innodb_io"
+                            data-host="http://localhost:29999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 1000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.innodb_io"
+                            data-host="http://localhost:39999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 1000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.innodb_io"
+                            data-host="http://localhost:49999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 1000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.innodb_io_ops"
+                            data-host="http://localhost:29999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 1000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.innodb_io_ops"
+                            data-host="http://localhost:39999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 1000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.innodb_io_ops"
+                            data-host="http://localhost:49999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 1000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.innodb_io_pending_ops"
+                            data-host="http://localhost:29999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 1000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.innodb_io_pending_ops"
+                            data-host="http://localhost:39999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 1000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.innodb_io_pending_ops"
+                            data-host="http://localhost:49999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 1000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.innodb_log"
+                            data-host="http://localhost:29999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 1000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.innodb_log"
+                            data-host="http://localhost:39999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 1000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.innodb_log"
+                            data-host="http://localhost:49999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 1000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.innodb_os_log"
+                            data-host="http://localhost:29999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 1000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.innodb_os_log"
+                            data-host="http://localhost:39999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 1000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.innodb_os_log"
+                            data-host="http://localhost:49999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 1000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.innodb_os_log_fsync_writes"
+                            data-host="http://localhost:29999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 1000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.innodb_os_log_fsync_writes"
+                            data-host="http://localhost:39999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 1000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.innodb_os_log_fsync_writes"
+                            data-host="http://localhost:49999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 1000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.innodb_os_log_io"
+                            data-host="http://localhost:29999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 1000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.innodb_os_log_io"
+                            data-host="http://localhost:39999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 1000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.innodb_os_log_io"
+                            data-host="http://localhost:49999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 1000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.innodb_cur_row_lock"
+                            data-host="http://localhost:29999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 1000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.innodb_cur_row_lock"
+                            data-host="http://localhost:39999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 1000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.innodb_cur_row_lock"
+                            data-host="http://localhost:49999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 1000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.innodb_rows"
+                            data-host="http://localhost:29999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 1000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.innodb_rows"
+                            data-host="http://localhost:39999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 1000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.innodb_rows"
+                            data-host="http://localhost:49999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 1000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.innodb_buffer_pool_pages"
+                            data-host="http://localhost:29999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 1000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.innodb_buffer_pool_pages"
+                            data-host="http://localhost:39999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 1000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.innodb_buffer_pool_pages"
+                            data-host="http://localhost:49999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 1000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.innodb_buffer_pool_flush_pages_requests"
+                            data-host="http://localhost:29999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 1000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.innodb_buffer_pool_flush_pages_requests"
+                            data-host="http://localhost:39999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 1000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.innodb_buffer_pool_flush_pages_requests"
+                            data-host="http://localhost:49999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 1000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.innodb_buffer_pool_bytes"
+                            data-host="http://localhost:29999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 1000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.innodb_buffer_pool_bytes"
+                            data-host="http://localhost:39999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 1000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.innodb_buffer_pool_bytes"
+                            data-host="http://localhost:49999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 1000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.innodb_buffer_pool_read_ahead"
+                            data-host="http://localhost:29999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 1000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.innodb_buffer_pool_read_ahead"
+                            data-host="http://localhost:39999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 1000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.innodb_buffer_pool_read_ahead"
+                            data-host="http://localhost:49999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 1000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.innodb_buffer_pool_ops"
+                            data-host="http://localhost:29999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 1000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.innodb_buffer_pool_ops"
+                            data-host="http://localhost:39999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 1000]"
+                            ></div>
+                    <div data-netdata="mysql_isucon.innodb_buffer_pool_ops"
+                            data-host="http://localhost:49999"
+                            data-chart-library="dygraph"
+                            data-width="32%"
+                            data-height="70%"
+                            data-after="-300"
+                            data-dygraph-valuerange="[0, 1000]"
+                            ></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

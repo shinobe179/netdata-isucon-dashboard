@@ -1,0 +1,45 @@
+.grid-area {
+	display: grid !important;
+	height: 100vh !important;
+	grid-template-rows: 50% 50% !important;
+	grid-template-columns: 100% !important;
+}
+
+.main-area {
+	grid-row: 1 !important;
+	grid-column: 1 !important;
+	overflow-y: scroll !important;
+	border-bottom: 1px dotted #ffffff !important;
+}
+
+.mysql-area {
+	grid-row: 2 !important;
+	grid-column: 1 !important;
+	overflow-y: scroll !important;
+	border-bottom: 1px dotted #ffffff !important;
+}
+
+/*
+.grid-area {
+	display: grid !important;
+	height: 100vh !important;
+	grid-template-rows: 70% 30% !important;
+	grid-template-columns: 100% !important;
+	grid-gap: 3px;
+	position : relative;
+}
+
+.main-area {
+	grid-row: 1 !important;
+	grid-column: 1 !important;
+	overflow-y: scroll !important;
+	border: 5px #ff0000 !important;
+}
+
+.mysql-area {
+	grid-row: 2 !important;
+	grid-column: 1 !important;
+	overflow-y: scroll !important;
+	border: 5px #ff0000 !important;
+}
+*/

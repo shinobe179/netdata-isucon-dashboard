@@ -2,7 +2,7 @@
 <!-- SPDX-License-Identifier: GPL-3.0-or-later -->
 <html lang="en">
 <head>
-    <title>NetData ISUCON Dashboard</title>
+    <title>NetData ISUCON MySQL Dashboard</title>
     <meta name="application-name" content="netdata">
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -20,7 +20,7 @@
     <meta property="og:title" content="netdata - real-time performance monitoring, done right!"/>
     <meta property="og:description" content="Stunning real-time dashboards, blazingly fast and extremely interactive. Zero configuration, zero dependencies, zero maintenance." />
 
-    <link rel="stylesheet" type="text/css" href="./isucon.css"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="./isucon.css"></script> -->
 </head>
 <script>
 // this section has to appear before loading dashboard.js
@@ -88,170 +88,6 @@ setTimeout(function(){
 
 <div style="width: 100%; text-align: center; display: inline-block;">
     <div class="grid-area">
-        <div class="main-area">
-            <div style="width: 100%; height: 24vh; text-align: center; display: inline-block;">
-                <div style="width: 100%; height: 10px; text-align: center; display: inline-block;">
-                    <b>RAM</b>
-                </div>
-                <div style="width: 100%; height: 100%; text-align: center; display: inline-block;">
-                    <br/>
-                    <div data-netdata="system.ram"
-                            data-host="http://localhost:29999"
-                            data-chart-library="dygraph"
-                            data-width="32%"
-                            data-height="70%"
-                            data-after="-300"
-                            ></div>
-                    <div data-netdata="system.ram"
-                            data-host="http://localhost:39999"
-                            data-chart-library="dygraph"
-                            data-width="32%"
-                            data-height="70%"
-                            data-after="-300"
-                            ></div>
-                    <div data-netdata="system.ram"
-                            data-host="http://localhost:49999"
-                            data-chart-library="dygraph"
-                            data-width="32%"
-                            data-height="70%"
-                            data-after="-300"
-                            ></div>
-                </div>
-            </div>
-            <div style="width: 100%; height: 24vh; text-align: center; display: inline-block;">
-                <div style="width: 100%; height: 10px; text-align: center; display: inline-block;">
-                    <b>Apps CPU Time </b>
-                </div>
-                <div style="width: 100%; height: 100%; text-align: center; display: inline-block;">
-                    <br/>
-                    <div data-netdata="apps.cpu"
-                            data-host="http://localhost:29999"
-                            data-chart-library="dygraph"
-                            data-width="32%"
-                            data-height="70%"
-                            data-after="-300"
-                            data-dygraph-valuerange="[0, 100]"
-                            ></div>
-                    <div data-netdata="apps.cpu"
-                            data-host="http://localhost:39999"
-                            data-chart-library="dygraph"
-                            data-width="32%"
-                            data-height="70%"
-                            data-after="-300"
-                            data-dygraph-valuerange="[0, 100]"
-                            ></div>
-                    <div data-netdata="apps.cpu"
-                            data-host="http://localhost:49999"
-                            data-chart-library="dygraph"
-                            data-width="32%"
-                            data-height="70%"
-                            data-after="-300"
-                            data-dygraph-valuerange="[0, 100]"
-                            ></div>
-                </div>
-            </div>
-            <div style="width: 100%; height: 24vh; text-align: center; display: inline-block;">
-                <div style="width: 100%; height: 10px; text-align: center; display: inline-block;">
-                    <b>CPU </b>
-                </div>
-                <div style="width: 100%; height: 100%; text-align: center; display: inline-block;">
-                    <br/>
-                    <div data-netdata="system.cpu"
-                            data-host="http://localhost:29999"
-                            data-chart-library="dygraph"
-                            data-width="32%"
-                            data-height="70%"
-                            data-after="-300"
-                            data-dygraph-valuerange="[0, 100]"
-                            ></div>
-                    <div data-netdata="system.cpu"
-                            data-host="http://localhost:39999"
-                            data-chart-library="dygraph"
-                            data-width="32%"
-                            data-height="70%"
-                            data-after="-300"
-                            data-dygraph-valuerange="[0, 100]"
-                            ></div>
-                    <div data-netdata="system.cpu"
-                            data-host="http://localhost:49999"
-                            data-chart-library="dygraph"
-                            data-width="32%"
-                            data-height="70%"
-                            data-after="-300"
-                            data-dygraph-valuerange="[0, 100]"
-                            ></div>
-                </div>
-            </div>
-
-            <div style="width: 100%; height: 24vh; text-align: center; display: inline-block;">
-                <div style="width: 100%; height: 10px; text-align: center; display: inline-block;">
-                    <b>Disk I/O </b>
-                </div>
-                <div style="width: 100%; height: 100%; text-align: center; display: inline-block;">
-                    <div data-netdata="system.io"
-                            data-host="http://localhost:29999"
-                            data-common-max="io"
-                            data-common-min="io"
-                            data-chart-library="dygraph"
-                            data-width="32%"
-                            data-height="70%"
-                            data-after="-300"
-                            ></div>
-                    <div data-netdata="system.io"
-                            data-host="http://localhost:39999"
-                            data-common-max="io"
-                            data-common-min="io"
-                            data-chart-library="dygraph"
-                            data-width="32%"
-                            data-height="70%"
-                            data-after="-300"
-                            ></div>
-                    <div data-netdata="system.io"
-                            data-host="http://localhost:49999"
-                            data-common-max="io"
-                            data-common-min="io"
-                            data-chart-library="dygraph"
-                            data-width="32%"
-                            data-height="70%"
-                            data-after="-300"
-                            ></div>
-                </div>
-            </div>
-            <div style="width: 100%; height: 24vh; text-align: center; display: inline-block;">
-                <div style="width: 100%; height: 10px; text-align: center; display: inline-block;">
-                    <b>IPv4 traffic </b>
-                </div>
-                <div style="width: 100%; height: 100%; text-align: center; display: inline-block;">
-                    <div data-netdata="system.net"
-                            data-host="http://localhost:29999"
-                            data-common-max="traffic"
-                            data-common-min="traffic"
-                            data-chart-library="dygraph"
-                            data-width="32%"
-                            data-height="70%"
-                            data-after="-300"
-                            ></div>
-                    <div data-netdata="system.net"
-                            data-host="http://localhost:39999"
-                            data-common-max="traffic"
-                            data-common-min="traffic"
-                            data-chart-library="dygraph"
-                            data-width="32%"
-                            data-height="70%"
-                            data-after="-300"
-                            ></div>
-                    <div data-netdata="system.net"
-                            data-host="http://localhost:49999"
-                            data-common-max="traffic"
-                            data-common-min="traffic"
-                            data-chart-library="dygraph"
-                            data-width="32%"
-                            data-height="70%"
-                            data-after="-300"
-                            ></div>
-                </div>
-            </div>
-        </div>
         <div class="mysql-area">
             <div style="width: 100%; height: 24vh; text-align: center; display: inline-block;">
                 <div style="width: 100%; height: 10px; text-align: center; display: inline-block;">

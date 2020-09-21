@@ -6,6 +6,15 @@ Netdata dashboard for ISUCON
 # Prerequisites
 You have already installed Netdata to your local machine and servers.
 
+# HTML
+
+- isucon.html
+  - for monitoring compute resources and MySQL
+- isucon_grid.html
+  - for monitoring compute resource and MySQL, deviced by CSS grid
+- isucon_mysql.html
+  - for monitoring MySQL
+
 # How to Use
 
 ## on monitored server
@@ -28,12 +37,8 @@ sudo systemctl restart netdata
 git clone https://github.com/shinobe179/netdata-isucon-dashboard
 
 # copy files
-sudo cp -p netdata-isucon-dashboard/isucon.html /usr/share/netdata/web/isucon.html
-sudo cp -p netdata-isucon-dashboard/isucon_mysql.html /usr/share/netdata/web/isucon_mysql.html
-sudo cp -p netdata-isucon-dashboard/isucon.css /usr/share/netdata/web/isucon.css
-sudo chown netdata:netdata /usr/share/netdata/web/isucon.html
-sudo chown netdata:netdata /usr/share/netdata/web/isucon_mysql.html
-sudo chown netdata:netdata /usr/share/netdata/web/isucon.css
+sudo cp -p netdata-isucon-dashboard/isucon* 
+sudo chown netdata:netdata /usr/share/netdata/web/isucon*
 
 # connect ssh port-forwarding
 

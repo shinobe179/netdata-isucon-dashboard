@@ -11,7 +11,7 @@ You have already installed Netdata to your local machine and servers.
 - isucon.html
   - for monitoring compute resources and MySQL
 - isucon_grid.html
-  - for monitoring compute resource and MySQL, deviced by CSS grid
+  - for monitoring compute resource and MySQL, devided by CSS grid
 - isucon_mysql.html
   - for monitoring MySQL
 

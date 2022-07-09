@@ -42,13 +42,8 @@ sudo chown netdata:netdata /usr/share/netdata/web/isucon*
 
 # connect ssh port-forwarding
 
-## for server-a
-ssh -L 29999:localhost:19999 server-a
-
-## for server-b
-ssh -L 39999:localhost:19999 server-b
-
-## for server-c
+ssh -L 29999:localhost:19999 server-a -fN && \
+ssh -L 39999:localhost:19999 server-b -fN && \
 ssh -L 49999:localhost:19999 server-c
 ```
 

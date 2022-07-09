@@ -42,9 +42,9 @@ sudo chown netdata:netdata /usr/share/netdata/web/isucon*
 
 # connect ssh port-forwarding
 
-ssh -L 29999:localhost:19999 server-a -fN && \
-ssh -L 39999:localhost:19999 server-b -fN && \
-ssh -L 49999:localhost:19999 server-c
+ssh -L 29999:localhost:19999 isucon1 -fN && \
+ssh -L 39999:localhost:19999 isucon2 -fN && \
+ssh -L 49999:localhost:19999 isucon3 -fN
 ```
 
 ...and browse `http://localhost:19999/isucon.html`.

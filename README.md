@@ -50,3 +50,11 @@ ssh -L 49999:localhost:19999 isucon3 -fN
 ```
 
 ...and browse `http://localhost:19999/isucon.html`.
+
+# Sharing the dashboard
+
+You can share the dashboard by using Ngrok. Note that shared members also need SSH port-forwarding.
+
+```
+$ ngrok http 19999
+```

@@ -20,11 +20,13 @@ You have already installed Netdata to your local machine and servers.
 ## on monitored server
 
 ```
-# clone this repo
-git clone https://github.com/shinobe179/netdata-isucon-dashboard
+# local machine
+# send mysql.conf to monitored server
+cd path/to/netdata-isucon-dashboard
+scp go.d/mysql.conf isucon@isucon1:/tmp
 
-# copy files
-sudo cp -p netdata-isucon-dashboard/go.d/mysql.conf /etc/netdata/go.d/mysql.conf
+# in monitored server
+sudo cp -p /tmp/mysql.conf /etc/netdata/go.d/mysql.conf
 
 # restart netdata to load mysql.conf
 sudo systemctl restart netdata
